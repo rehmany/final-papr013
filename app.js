@@ -42,10 +42,11 @@ app.use(function (err, req, res, next) {
 });
 
 mongoose
-  .connect("mongodb://localhost/productscrud", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  .connect("mongodb+srv://atta-01:attachme@cluster0.qddrp.mongodb.net/final-p?retryWrites=true&w=majorit", 
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true  })
+  .then(() => {
+    console.log("Connected to Mongo....")
+    app.listen(8000);
   })
-  .then(() => console.log("Connected to Mongo...."))
   .catch((error) => console.log(error.message));
 module.exports = app;

@@ -14,15 +14,29 @@ router.get("/add", checkSessionAuth, async function (req, res, next) {
 // store data in db
 router.post("/add", async function (req, res, next) {
   let product = new Product(req.body);
-  await product.save();
+  try{
+    await product.save();
+  }catch(err){
+    console.log(err);
+  }
   res.redirect("/products");
 });
 router.get("/delete/:id", async function (req, res, next) {
-  let product = await Product.findByIdAndDelete(req.params.id);
+  let product;
+  try{
+    product = await Product.findByIdAndDelete(req.params.id);
+  }catch(err){
+    console.log(err);
+  }
   res.redirect("/products");
 });
 router.get("/cart/:id", async function (req, res, next) {
-  let product = await Product.findById(req.params.id);
+  let product ;
+  try{
+    product = await Product.findById(req.params.id);
+  }catch(err){
+    console.log(err);
+  }
   console.log("Add This Product in cart");
   let cart = [];
   if (req.cookies.cart) cart = req.cookies.cart;
@@ -41,14 +55,28 @@ router.get("/cart/remove/:id", async function (req, res, next) {
   res.redirect("/cart");
 });
 router.get("/edit/:id", async function (req, res, next) {
-  let product = await Product.findById(req.params.id);
+  let product;
+  try{
+    product =  await Product.findById(req.params.id);
+  }catch(err){
+    console.log(err);
+  }
   res.render("products/edit", { product });
 });
 router.post("/edit/:id", async function (req, res, next) {
-  let product = await Product.findById(req.params.id);
+  let product;
+  try{
+    product =  await Product.findById(req.params.id);
+  }catch(err){
+    console.log(err);
+  }
   product.name = req.body.name;
   product.price = req.body.price;
-  await product.save();
+  try{
+    await product.save();
+  }catch(err){
+    console.log(err);
+  }
   res.redirect("/products");
 });
 

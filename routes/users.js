@@ -23,7 +23,12 @@ router.post("/login", async function (req, res, next) {
 });
 router.post("/register", async function (req, res, next) {
   let user = new User(req.body);
-  await user.save();
+  console.log(user);
+  try{
+    await user.save();
+  }catch(err){
+    console.log(err);
+  }
   res.redirect("/");
 });
 
