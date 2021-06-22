@@ -45,7 +45,7 @@ mongoose
   .connect("mongodb+srv://atta-01:attachme@cluster0.qddrp.mongodb.net/final-p?retryWrites=true&w=majorit", 
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true  })
   .then(() => {
-    console.log("Connected to Mongo....")
+    console.log("Connected to Mongo....blala")
     app.listen(8000);
   })
   .catch((error) => console.log(error.message));
